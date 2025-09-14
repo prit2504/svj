@@ -1,0 +1,35 @@
+{
+  "name": "svj2",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "dev": "concurrently \"npm run tailwind:watch\" \"nodemon app.js\"",
+    "tailwind:watch": "tailwindcss -i ./src/input.css -o ./public/css/styles.css --watch",
+    "tailwind:build": "tailwindcss -i ./src/input.css -o ./public/css/styles.css --minify"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cloudinary": "^2.7.0",
+    "connect-mongo": "^5.1.0",
+    "dotenv": "^17.2.2",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "method-override": "^3.0.0",
+    "mongoose": "^8.18.1",
+    "multer": "^2.0.2",
+    "streamifier": "^0.1.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "concurrently": "^8.0.0",
+    "nodemon": "^3.1.10",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17"
+  }
+}

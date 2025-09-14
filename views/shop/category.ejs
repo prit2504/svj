@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= category %> | Jewellery Shop</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="/" class="flex items-center space-x-2">
+        <img src="/images/logo.png" alt="Logo" class="h-10 w-auto">
+        <span class="text-xl font-bold text-[#B76E79]">Jewellery Shop</span>
+      </a>
+      <a href="/offers" class="text-gray-700 hover:text-[#B76E79]">Offers</a>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <section class="max-w-7xl mx-auto px-4 py-6">
+    <h2 class="text-3xl font-bold text-gray-800 mb-4"><%= category %> Collection</h2>
+  </section>
+
+  <!-- Products Grid -->
+  <section class="max-w-7xl mx-auto px-4 pb-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <% if (products.length === 0) { %>
+      <p class="text-gray-500 text-center col-span-full">No products found in <%= category %>.</p>
+    <% } else { %>
+      <% products.forEach(product => { %>
+        <a href="/product/<%= product._id %>" 
+           class="group product-card flex flex-col overflow-hidden rounded-2xl shadow-md border border-[#f5e6d3] 
+                  bg-gradient-to-br from-[#fffdf9] via-[#fff8f2] to-[#fff3ea] hover:shadow-xl hover:-translate-y-1 
+                  transition-all duration-300">
+          
+          <!-- Image Section -->
+          <div class="relative overflow-hidden">
+            <img src="<%= product.imageUrl %>" alt="<%= product.title %>" 
+                 class="w-full h-56 object-cover transform group-hover:scale-110 transition duration-500"/>
+            
+            <% if (!product.inStock) { %>
+              <span class="absolute top-3 left-3 bg-red-600 text-white text-xs px-2 py-1 rounded-full shadow">Out of Stock</span>
+            <% } else { %>
+              <span class="absolute top-3 left-3 bg-green-600 text-white text-xs px-2 py-1 rounded-full shadow">Available</span>
+            <% } %>
+            
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition"></div>
+          </div>
+
+          <!-- Content Section -->
+          <div class="p-4 flex flex-col flex-1">
+            <h3 class="font-semibold text-base sm:text-lg text-gray-800 line-clamp-1 group-hover:text-[#B76E79] transition-colors">
+              <%= product.title %>
+            </h3>
+            <p class="text-sm text-gray-500 mt-1"><%= product.category %></p>
+            
+            <!-- Price + Button -->
+            <div class="mt-4 flex items-center justify-between">
+              <span class="text-[#B76E79] font-bold text-lg tracking-wide">₹<%= product.price || '---' %></span>
+              <button class="bg-gradient-to-r from-[#B76E79] to-[#E3C396] text-white text-xs sm:text-sm px-4 py-1.5 
+                             rounded-full shadow-md hover:opacity-90 hover:scale-105 transition">
+                View
+              </button>
+            </div>
+          </div>
+        </a>
+      <% }) %>
+    <% } %>
+  </section>
+
+  <!-- Pagination -->
+  <% if (totalPages > 1) { %>
+    <div class="flex justify-center items-center gap-2 mb-10">
+      <% if (currentPage > 1) { %>
+        <a href="?page=<%= currentPage - 1 %>" 
+           class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">Prev</a>
+      <% } %>
+      <span class="text-gray-700">Page <%= currentPage %> of <%= totalPages %></span>
+      <% if (currentPage < totalPages) { %>
+        <a href="?page=<%= currentPage + 1 %>" 
+           class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">Next</a>
+      <% } %>
+    </div>
+  <% } %>
+
+</body>
+</html>
