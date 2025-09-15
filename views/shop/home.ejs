@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shree Vaghshwari Jewellers</title>
+  <title>Shree Vagheswari Jewellers</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:wght@400;500&display=swap"
     rel="stylesheet" />
@@ -60,7 +60,7 @@
     <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
       <div class="flex items-center space-x-3">
         <img src="/images/logo.png" alt="Logo" class="h-12 w-12 object-contain" />
-        <div class="text-2xl md:text-3xl font-bold text-yellow-600">Shree Vaghshwari Jewellers</div>
+        <div class="text-2xl md:text-3xl font-bold text-[#B76E79]">Shree Vagheswari Jewellers</div>
       </div>
       <div class="space-x-4 hidden md:flex">
         <a href="#" class="text-gray-700 hover:text-[#E3C396] font-medium transition">Home</a>
@@ -71,7 +71,7 @@
   </nav>
 
   <!-- Mobile Search -->
-  <div
+  <!-- <div
     class="sm:hidden flex items-center mx-4 px-3 py-2 rounded-lg shadow-md cursor-pointer hover:bg-[#f9f5f0] transition duration-200 mt-4 mb-4 border border-[#E3C396]/40"
     onclick="window.location.href='/search'">
     <svg class="w-5 h-5 text-[#B76E79]" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -80,14 +80,14 @@
         d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
     </svg>
     <span class="ml-3 text-[#7A6C5D] text-sm">Search jewellery</span>
-  </div>
+  </div> -->
 
   <!-- Hero Section -->
   <section
     class="mx-4 my-4 bg-gradient-to-r from-[#fffaf5] to-[#fdf3e7] border border-red-500 rounded-2xl p-10 shadow-xl text-center">
     <div class="relative z-10 text-white px-4 animate-fadeIn" style="animation: fadeIn 0.7s ease-out;">
       <h1 class="text-4xl sm:text-6xl font-serif font-bold text-[#B76E79] mb-4 leading-snug">Welcome to <br />Shree
-        Vaghshwari Jewellers</h1>
+        Vagheswari Jewellers</h1>
       <p class="text-sm sm:text-lg text-gray-600 mb-6 max-w-2xl mx-auto">Explore our handcrafted jewellery collections,
         blending tradition and modern design for every special occasion.</p>
       <a href="#categories"
@@ -176,7 +176,7 @@
         <h3 class="text-[#B76E79] font-semibold mb-3">Contact Us | Help</h3>
         <ul class="space-y-2">
           <li class="hover:text-[#E3C396] cursor-pointer">
-            <a href="https://www.instagram.com/1gram_vagheswari_jewellers" target="_blank">WhatsApp</a>
+            <a href="https://wa.me/message/YYDUQB5Y2PCTC1" target="_blank">WhatsApp</a>
           </li>
         </ul>
       </div>
@@ -192,7 +192,7 @@
         </ul>
       </div>
     </div>
-    <p class="text-center mt-8 text-xs text-gray-500">© 2025 Shree Vaghshwari Jewellers. All rights reserved.</p>
+    <p class="text-center mt-8 text-xs text-gray-500">© 2025 Shree Vagheswari Jewellers. All rights reserved.</p>
   </footer>
 
   <!-- Scroll to Top -->
@@ -241,38 +241,43 @@
           const div = document.createElement('a');
           div.href = `/product/${product._id}`;
           div.className = `
-          group product-card flex flex-col overflow-hidden rounded-2xl shadow-md border border-[#f5e6d3] 
-          bg-gradient-to-br from-[#fffdf9] via-[#fff8f2] to-[#fff3ea] hover:shadow-xl hover:-translate-y-1 
-          transition-all duration-300
-        `;
-          div.innerHTML = `
-          <!-- Image Section -->
-          <div class="relative overflow-hidden">
-            <img src="${product.imageUrl}" alt="${product.title}" 
-                 class="w-full h-56 object-cover transform group-hover:scale-110 transition duration-500"/>
-            ${!product.inStock ? `
-              <span class="absolute top-3 left-3 bg-red-600 text-white text-xs px-2 py-1 rounded-full shadow">Out of Stock</span>
-            ` : `
-              <span class="absolute top-3 left-3 bg-green-600 text-white text-xs px-2 py-1 rounded-full shadow">Available</span>
-            `}
-            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition"></div>
-          </div>
-          <!-- Content Section -->
-          <div class="p-4 flex flex-col flex-1">
-            <h3 class="font-semibold text-base sm:text-lg text-gray-800 line-clamp-1 group-hover:text-[#B76E79] transition-colors">
-              ${product.title}
-            </h3>
-            <p class="text-sm text-gray-500 mt-1">${product.category}</p>
-            <!-- Price + Button -->
-            <div class="mt-4 flex items-center justify-between">
-              <span class="text-[#B76E79] font-bold text-lg tracking-wide">₹${product.price || '---'}</span>
-              <button class="bg-gradient-to-r from-[#B76E79] to-[#E3C396] text-white text-xs sm:text-sm px-4 py-1.5 
-                rounded-full shadow-md hover:opacity-90 hover:scale-105 transition">
-                View
-              </button>
-            </div>
-          </div>
-        `;
+  group product-card flex flex-col overflow-hidden rounded-2xl shadow-md border border-[#f5e6d3] 
+  bg-gradient-to-br from-[#fffdf9] via-[#fff8f2] to-[#fff3ea] hover:shadow-xl hover:-translate-y-1 
+  transition-all duration-300
+`;
+
+div.innerHTML = `
+  <!-- Image Section -->
+  <div class="relative overflow-hidden" style="width: 100%; padding-top: 100%; position: relative;">
+    <img src="${product.imageUrl}" alt="${product.title}" 
+         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
+         class="group-hover:scale-110">
+    ${!product.inStock ? `
+      <span class="absolute top-3 left-3 bg-red-600 text-white text-xs px-2 py-1 rounded-full shadow">Out of Stock</span>
+    ` : `
+      <span class="absolute top-3 left-3 bg-green-600 text-white text-xs px-2 py-1 rounded-full shadow">Available</span>
+    `}
+    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition"></div>
+  </div>
+
+  <!-- Content Section -->
+  <div class="p-4 flex flex-col flex-1">
+    <h3 class="font-semibold text-base sm:text-lg text-gray-800 line-clamp-1 group-hover:text-[#B76E79] transition-colors">
+      ${product.title}
+    </h3>
+    <p class="text-sm text-gray-500 mt-1">${product.category}</p>
+
+    <!-- Price + Button -->
+    <div class="mt-4 flex items-center justify-between">
+      <span class="text-[#B76E79] font-bold text-lg tracking-wide">₹${product.price || '---'}</span>
+      <button class="bg-gradient-to-r from-[#B76E79] to-[#E3C396] text-white text-xs sm:text-sm px-4 py-1.5 
+        rounded-full shadow-md hover:opacity-90 hover:scale-105 transition">
+        View
+      </button>
+    </div>
+  </div>
+`;
+
           productsContainer.appendChild(div);
         });
       }

@@ -6,7 +6,7 @@
     "start": "nodemon app.js",
     "dev": "concurrently \"npm run tailwind:watch\" \"nodemon app.js\"",
     "tailwind:watch": "tailwindcss -i ./src/input.css -o ./public/css/styles.css --watch",
-    "tailwind:build": "tailwindcss -i ./src/input.css -o ./public/css/styles.css --minify"
+    "build:css": "npx tailwindcss -i ./public/css/styles.css -o ./public/css/styles.build.css --minify"
   },
   "keywords": [],
   "author": "",

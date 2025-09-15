@@ -46,6 +46,11 @@ const productSchema = new mongoose.Schema(
       required: true,
       min: 0,
     },
+    mrp: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
     inStock: {
       type: Boolean,
       default: true,

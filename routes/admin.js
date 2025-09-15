@@ -13,10 +13,44 @@ function isAdmin(req, res, next) {
 }
 
 // ----------- Admin Dashboard -----------
+// router.get("/dashboard", isAdmin, async (req, res) => {
+//   try {
+//     const products = await Product.find().sort({ createdAt: -1 });
+//     const categories = Product.schema.path("category").enumValues;
+    
+//     res.render("admin/dashboard", {
+//       products,
+//       selectedCategory: "",
+//       categories
+//     });
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).send("Server Error");
+//   }
+// });
 router.get("/dashboard", isAdmin, async (req, res) => {
-  const products = await Product.find().sort({ createdAt: -1 });
-  res.render("admin/dashboard", { products });
+  try {
+    const selectedCategory = req.query.category || "All";
+
+    // fetch categories from enum
+    const categories = Product.schema.path("category").enumValues;
+
+    // filter products if a category is selected
+    const query = selectedCategory !== "All" ? { category: selectedCategory } : {};
+    const products = await Product.find(query).sort({ createdAt: -1 });
+
+    res.render("admin/dashboard", {
+      products,
+      selectedCategory,
+      categories
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server Error");
+  }
 });
+
+
 
 // ----------- Add Product Page -----------
 router.get("/products/new", isAdmin, (req, res) => {
@@ -27,7 +61,7 @@ router.get("/products/new", isAdmin, (req, res) => {
 // ----------- Create Product -----------
 router.post("/products", isAdmin, upload.single("image"), async (req, res) => {
   try {
-    const { title, description, category, price, inStock  } = req.body;
+    const { title, description, category, price, mrp, inStock  } = req.body;
 
     if (!req.file) return res.render("admin/new", { error: "Please upload an image", categories: Product.schema.path("category").enumValues });
 
@@ -47,6 +81,7 @@ router.post("/products", isAdmin, upload.single("image"), async (req, res) => {
       description,
       category,
       price,
+      mrp,
       inStock: inStock === "on",
       imageUrl: result.secure_url,
     });
@@ -74,9 +109,9 @@ router.get("/products/:id/edit", isAdmin, async (req, res) => {
 // ----------- Update Product -----------
 router.put("/products/:id", isAdmin, upload.single("image"), async (req, res) => {
   try {
-    const { title, description, category, price, inStock } = req.body;
+    const { title, description, category, price, mrp, inStock } = req.body;
 
-    const updateData = { title, description, category, price, inStock: inStock === "on" };
+    const updateData = { title, description, category, price, mrp, inStock: inStock === "on" };
 
     if (req.file) {
       const streamUpload = (buffer) =>
@@ -110,5 +145,30 @@ router.delete("/products/:id", isAdmin, async (req, res) => {
     res.redirect("/admin/dashboard");
   }
 });
+
+// routes/admin.js
+router.get("/products", async (req, res) => {
+  try {
+    const { category } = req.query;
+    const filter = {};
+
+    if (category && category !== "All") {
+      filter.category = category;
+    }
+
+    const products = await Product.find(filter);
+    const categories = await Product.distinct("category");
+
+    res.render("admin/products", {
+      products,
+      categories,
+      selectedCategory: category || "All",
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server Error");
+  }
+});
+
 
 module.exports = router;

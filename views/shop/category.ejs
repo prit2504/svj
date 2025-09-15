@@ -1,89 +1,368 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= category %> | Jewellery Shop</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <title>
+    <%= category %> | Jewellery Shop
+  </title>
+  <style>
+    /* Global */
+    body {
+      background-color: #f9fafb;
+      color: #1f2937;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Navbar */
+    nav {
+      background-color: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    nav .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    nav img {
+      height: 40px;
+      width: auto;
+    }
+
+    nav .brand {
+      font-size: 20px;
+      font-weight: bold;
+      color: #B76E79;
+      margin-left: 8px;
+    }
+
+    /* nav .offers {
+      color: #374151;
+      transition: color 0.3s;
+      font-size: 16px;
+      margin-top: 8px;
+    } */
+
+    /* nav .offers:hover {
+      color: #B76E79;
+    } */
+
+    /* Header */
+    section.header {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px 16px;
+    }
+
+    section.header h2 {
+      font-size: 26px;
+      font-weight: bold;
+      margin-bottom: 16px;
+    }
+
+    /* Products Grid */
+    section.products {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 16px 40px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    /* Card */
+    .product-card {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid #f5e6d3;
+      background: linear-gradient(to bottom right, #fffdf9, #fff8f2, #fff3ea);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+
+    }
+
+    .product-card:hover {
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+      transform: translateY(-4px);
+    }
+
+    .product-card img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      /* Makes the image container square */
+      object-fit: cover;
+      /* Ensures image covers the square without distortion */
+      transition: transform 0.5s ease;
+      display: block;
+    }
+
+
+    .product-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .product-card .relative {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-card .status {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 4px 8px;
+      font-size: 12px;
+      border-radius: 999px;
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .out-of-stock {
+      background-color: #dc2626;
+    }
+
+    .available {
+      background-color: #16a34a;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0);
+      transition: background-color 0.3s;
+    }
+
+    .product-card:hover .overlay {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .product-card .content {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .product-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0;
+      color: #1f2937;
+      transition: color 0.3s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .product-card:hover h3 {
+      color: #B76E79;
+    }
+
+    .product-card p {
+      font-size: 14px;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+
+    .product-card .footer {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .price {
+      color: #B76E79;
+      font-weight: bold;
+      font-size: 18px;
+      letter-spacing: 1px;
+    }
+
+    .mrp {
+      text-decoration: line-through
+    }
+
+    .product-card button {
+      background: linear-gradient(to right, #B76E79, #E3C396);
+      color: white;
+      font-size: 14px;
+      padding: 6px 16px;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s;
+    }
+
+    .product-card button:hover {
+      opacity: 0.9;
+      transform: scale(1.05);
+    }
+
+    /* Pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .pagination a {
+      padding: 8px 16px;
+      background-color: #e5e7eb;
+      color: #374151;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+    }
+
+    .pagination a:hover {
+      background-color: #d1d5db;
+    }
+
+    .pagination span {
+      color: #374151;
+      font-size: 14px;
+    }
+
+    /* ---------------- Responsive Breakpoints ---------------- */
+    @media (min-width: 640px) {
+      section.products {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 768px) {
+      section.products {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      section.products {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      /* nav .offers {
+        margin-top: 0;
+      } */
+    }
+
+    @media (max-width: 480px) {
+      section.header h2 {
+        font-size: 22px;
+      }
+
+      nav .brand {
+        font-size: 18px;
+      }
+
+      .product-card h3 {
+        font-size: 14px;
+      }
+
+      .price {
+        font-size: 16px;
+      }
+    }
+  </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+
+<body>
 
   <!-- Navbar -->
-  <nav class="bg-white shadow-md sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="/" class="flex items-center space-x-2">
-        <img src="/images/logo.png" alt="Logo" class="h-10 w-auto">
-        <span class="text-xl font-bold text-[#B76E79]">Jewellery Shop</span>
+  <nav>
+    <div class="container">
+      <a href="/" style="display: flex; align-items: center;">
+        <img src="/images/logo.png" alt="Logo">
+        <span class="brand">Shree Vagheswari Jewellers</span>
       </a>
-      <a href="/offers" class="text-gray-700 hover:text-[#B76E79]">Offers</a>
+      <!-- <a href="/offers" class="offers">Offers</a> -->
     </div>
   </nav>
 
   <!-- Header -->
-  <section class="max-w-7xl mx-auto px-4 py-6">
-    <h2 class="text-3xl font-bold text-gray-800 mb-4"><%= category %> Collection</h2>
+  <section class="header">
+    <h2>
+      <%= category %> Collection
+    </h2>
   </section>
 
   <!-- Products Grid -->
-  <section class="max-w-7xl mx-auto px-4 pb-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-    <% if (products.length === 0) { %>
-      <p class="text-gray-500 text-center col-span-full">No products found in <%= category %>.</p>
-    <% } else { %>
-      <% products.forEach(product => { %>
-        <a href="/product/<%= product._id %>" 
-           class="group product-card flex flex-col overflow-hidden rounded-2xl shadow-md border border-[#f5e6d3] 
-                  bg-gradient-to-br from-[#fffdf9] via-[#fff8f2] to-[#fff3ea] hover:shadow-xl hover:-translate-y-1 
-                  transition-all duration-300">
-          
-          <!-- Image Section -->
-          <div class="relative overflow-hidden">
-            <img src="<%= product.imageUrl %>" alt="<%= product.title %>" 
-                 class="w-full h-56 object-cover transform group-hover:scale-110 transition duration-500"/>
-            
-            <% if (!product.inStock) { %>
-              <span class="absolute top-3 left-3 bg-red-600 text-white text-xs px-2 py-1 rounded-full shadow">Out of Stock</span>
-            <% } else { %>
-              <span class="absolute top-3 left-3 bg-green-600 text-white text-xs px-2 py-1 rounded-full shadow">Available</span>
-            <% } %>
-            
-            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition"></div>
-          </div>
-
-          <!-- Content Section -->
-          <div class="p-4 flex flex-col flex-1">
-            <h3 class="font-semibold text-base sm:text-lg text-gray-800 line-clamp-1 group-hover:text-[#B76E79] transition-colors">
-              <%= product.title %>
-            </h3>
-            <p class="text-sm text-gray-500 mt-1"><%= product.category %></p>
-            
-            <!-- Price + Button -->
-            <div class="mt-4 flex items-center justify-between">
-              <span class="text-[#B76E79] font-bold text-lg tracking-wide">₹<%= product.price || '---' %></span>
-              <button class="bg-gradient-to-r from-[#B76E79] to-[#E3C396] text-white text-xs sm:text-sm px-4 py-1.5 
-                             rounded-full shadow-md hover:opacity-90 hover:scale-105 transition">
-                View
-              </button>
+  <section class="products">
+    <% if (products.length===0) { %>
+      <p style="text-align: center; color: #6b7280; grid-column: 1/-1;">
+        No products found in <%= category %>.
+      </p>
+      <% } else { %>
+        <% products.forEach(product=> { %>
+          <a href="/product/<%= product._id %>" class="product-card">
+            <!-- Image -->
+            <div class="relative">
+              <img src="<%= product.imageUrl %>" alt="<%= product.title %>" />
+              <% if (!product.inStock) { %>
+                <span class="status out-of-stock">Out of Stock</span>
+                <% } else { %>
+                  <span class="status available">Available</span>
+                  <% } %>
+                    <div class="overlay"></div>
             </div>
-          </div>
-        </a>
-      <% }) %>
-    <% } %>
+
+            <!-- Content -->
+            <div class="content">
+              <h3>
+                <%= product.title %>
+              </h3>
+              <p>
+                <%= product.category %>
+              </p>
+              <div class="footer">
+                <div class="price">PRICE : ₹<%= product.price || '---' %></div>
+                <div class="price">M.R.P : <span class="mrp">₹<%= product.price || '---' %></span></div>
+                <button>View</button>
+              </div>
+            </div>
+          </a>
+          <% }) %>
+            <% } %>
   </section>
 
   <!-- Pagination -->
-  <% if (totalPages > 1) { %>
-    <div class="flex justify-center items-center gap-2 mb-10">
-      <% if (currentPage > 1) { %>
-        <a href="?page=<%= currentPage - 1 %>" 
-           class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">Prev</a>
-      <% } %>
-      <span class="text-gray-700">Page <%= currentPage %> of <%= totalPages %></span>
-      <% if (currentPage < totalPages) { %>
-        <a href="?page=<%= currentPage + 1 %>" 
-           class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">Next</a>
-      <% } %>
+  <% if (totalPages> 1) { %>
+    <div class="pagination">
+      <% if (currentPage> 1) { %>
+        <a href="?page=<%= currentPage - 1 %>">Prev</a>
+        <% } %>
+          <span>Page <%= currentPage %> of <%= totalPages %></span>
+          <% if (currentPage < totalPages) { %>
+            <a href="?page=<%= currentPage + 1 %>">Next</a>
+            <% } %>
     </div>
-  <% } %>
+    <% } %>
 
 </body>
+
 </html>

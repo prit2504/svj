@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
   <link href="/css/styles.css" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-gray-50 text-gray-800">
 
   <!-- Navbar -->
@@ -21,65 +23,81 @@
 
   <!-- Add Product Form -->
   <section class="max-w-3xl mx-auto px-4 py-6 bg-white rounded-xl shadow">
-    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Add New Product</h2>
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-2xl font-semibold text-gray-800">Add New Product</h2>
+      <!-- Dynamic Back Button -->
+      <button type="button" onclick="window.history.back()"
+        class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-lg transition">
+        ← Back
+      </button>
+    </div>
 
     <% if (error) { %>
-      <p class="text-red-600 mb-4"><%= error %></p>
-    <% } %>
+      <p class="text-red-600 mb-4">
+        <%= error %>
+      </p>
+      <% } %>
 
-    <form action="/admin/products" method="POST" enctype="multipart/form-data" class="space-y-4">
-      <!-- Title -->
-      <div>
-        <label class="block font-medium text-gray-700">Title</label>
-        <input type="text" name="title" required 
-               class="w-full border px-3 py-2 rounded focus:ring-2 focus:ring-yellow-500">
-      </div>
+        <form action="/admin/products" method="POST" enctype="multipart/form-data" class="space-y-4">
+          <!-- Title -->
+          <div>
+            <label class="block font-medium text-gray-700">Title</label>
+            <input type="text" name="title" required
+              class="w-full border px-3 py-2 rounded focus:ring-2 focus:ring-yellow-500">
+          </div>
 
-      <!-- Description -->
-      <div>
-        <label class="block font-medium text-gray-700">Description</label>
-        <textarea name="description" rows="3" 
-                  class="w-full border px-3 py-2 rounded focus:ring-2 focus:ring-yellow-500"></textarea>
-      </div>
+          <!-- Description -->
+          <div>
+            <label class="block font-medium text-gray-700">Description</label>
+            <textarea name="description" rows="3"
+              class="w-full border px-3 py-2 rounded focus:ring-2 focus:ring-yellow-500"></textarea>
+          </div>
 
-      <!-- Category -->
-      <div>
-        <label class="block font-medium text-gray-700">Category</label>
-        <select name="category" required 
-                class="w-full border px-3 py-2 rounded focus:ring-2 focus:ring-yellow-500">
-          <% categories.forEach(cat => { %>
-            <option value="<%= cat %>"><%= cat %></option>
-          <% }) %>
-        </select>
-      </div>
+          <!-- Category -->
+          <div>
+            <label class="block font-medium text-gray-700">Category</label>
+            <select name="category" required class="w-full border px-3 py-2 rounded focus:ring-2 focus:ring-yellow-500">
+              <% categories.forEach(cat=> { %>
+                <option value="<%= cat %>">
+                  <%= cat %>
+                </option>
+                <% }) %>
+            </select>
+          </div>
 
-      <!-- Price -->
-      <div>
-        <label class="block font-medium text-gray-700">Price (₹)</label>
-        <input type="number" name="price" required min="0" step="1"
-               placeholder="Enter price in INR"
-               class="w-full border px-3 py-2 rounded focus:ring-2 focus:ring-yellow-500">
-      </div>
+          <!-- Price -->
+          <div>
+            <label class="block font-medium text-gray-700">Price (₹)</label>
+            <input type="number" name="price" required min="0" step="1" placeholder="Enter price in INR"
+              class="w-full border px-3 py-2 rounded focus:ring-2 focus:ring-yellow-500">
+          </div>
 
-      <!-- Stock -->
-      <div class="flex items-center space-x-2">
-        <input type="checkbox" name="inStock" id="inStock" checked>
-        <label for="inStock" class="text-gray-700">In Stock</label>
-      </div>
+          <!-- MRP -->
+          <div>
+            <label class="block font-medium text-gray-700">MRP (₹)</label>
+            <input type="number" name="mrp" required min="0" step="1" placeholder="Enter MRP in INR"
+              class="w-full border px-3 py-2 rounded focus:ring-2 focus:ring-yellow-500">
+          </div>
 
-      <!-- Image -->
-      <div>
-        <label class="block font-medium text-gray-700">Image</label>
-        <input type="file" name="image" accept="image/*" required class="w-full mt-1">
-      </div>
+          <!-- Stock -->
+          <div class="flex items-center space-x-2">
+            <input type="checkbox" name="inStock" id="inStock" checked>
+            <label for="inStock" class="text-gray-700">In Stock</label>
+          </div>
 
-      <!-- Submit -->
-      <button type="submit" 
-              class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg transition">
-        Add Product
-      </button>
-    </form>
+          <!-- Image -->
+          <div>
+            <label class="block font-medium text-gray-700">Image</label>
+            <input type="file" name="image" accept="image/*" required class="w-full mt-1">
+          </div>
+
+          <!-- Submit -->
+          <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg transition">
+            Add Product
+          </button>
+        </form>
   </section>
 
 </body>
+
 </html>
