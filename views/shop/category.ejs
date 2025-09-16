@@ -184,7 +184,7 @@
     }
 
     .product-card .footer {
-      margin-top: auto;
+      margin-top: 10px;
       display: flex;
       flex-direction: column;
       align-items: start;
@@ -344,12 +344,12 @@
               <h3>
                 <%= product.title %>
               </h3>
-              <p>
+              <!-- <p>
                 <%= product.category %>
-              </p>
+              </p> -->
               <div class="footer">
-                <div class="price">PRICE : ₹<%= product.price || '---' %></div>
-                <div class="price">M.R.P : <span class="mrp">₹<%= product.price || '---' %></span></div>
+                <div class="price">Price : ₹<%= product.price || '---' %></div>
+                <div class="price">Mrp : <span class="mrp">₹<%= product.price || '---' %></span></div>
                 <button>View</button>
               </div>
             </div>

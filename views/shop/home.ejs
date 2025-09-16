@@ -55,8 +55,8 @@
 
 <body class="bg-gradient-to-br from-[#fffdf9] via-[#fdf7f2] to-[#fffaf5] text-gray-800">
 
-  <!-- Navbar -->
-  <nav class="bg-white shadow-lg sticky top-0 z-50">
+  <div class="flex flex-col justify-center">
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
       <div class="flex items-center space-x-3">
         <img src="/images/logo.png" alt="Logo" class="h-12 w-12 object-contain" />
@@ -152,7 +152,7 @@
 
   <!-- Product Grid -->
   <section id="products"
-    class="border-gray-200 border-2 max-w-7xl mx-2 sm:mx-6 rounded-lg px-4 py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    class="border-gray-200 border-2 mx-2 sm:mx-6 rounded-lg px-4 py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
   </section>
 
   <!-- Pagination -->
@@ -204,6 +204,8 @@
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
     </svg>
   </button>
+  </div>
+  
 
   <script>
     // Scroll to Top Logic
@@ -246,7 +248,7 @@
   transition-all duration-300
 `;
 
-div.innerHTML = `
+          div.innerHTML = `
   <!-- Image Section -->
   <div class="relative overflow-hidden" style="width: 100%; padding-top: 100%; position: relative;">
     <img src="${product.imageUrl}" alt="${product.title}" 
@@ -265,11 +267,12 @@ div.innerHTML = `
     <h3 class="font-semibold text-base sm:text-lg text-gray-800 line-clamp-1 group-hover:text-[#B76E79] transition-colors">
       ${product.title}
     </h3>
-    <p class="text-sm text-gray-500 mt-1">${product.category}</p>
-
+    
+    <div class="text-[#B76E79] font-bold text-md tracking-wide">Price : ₹${product.price || '---'}</div>
+      <div class="text-[#B76E79] font-bold text-md tracking-wide line-through">Mrp : ₹${product.mrp || '---'}</div>
     <!-- Price + Button -->
     <div class="mt-4 flex items-center justify-between">
-      <span class="text-[#B76E79] font-bold text-lg tracking-wide">₹${product.price || '---'}</span>
+      
       <button class="bg-gradient-to-r from-[#B76E79] to-[#E3C396] text-white text-xs sm:text-sm px-4 py-1.5 
         rounded-full shadow-md hover:opacity-90 hover:scale-105 transition">
         View
