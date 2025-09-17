@@ -82,6 +82,9 @@
     <span class="ml-3 text-[#7A6C5D] text-sm">Search jewellery</span>
   </div> -->
 
+    <!-- Offer Banner -->
+
+
     <!-- Hero Section -->
     <section
       class="mx-4 my-4 bg-gradient-to-r from-[#fffaf5] to-[#fdf3e7] border border-red-500 rounded-2xl p-10 shadow-xl text-center">
@@ -96,6 +99,10 @@
           Now</a>
       </div>
     </section>
+
+
+
+
 
     <!-- Search Section -->
     <section class="max-w-7xl mx-auto px-4 py-8 flex flex-col md:flex-row gap-4 items-center justify-center">
@@ -113,6 +120,25 @@
       <button id="searchButton"
         class="bg-gradient-to-r from-[#B76E79] to-[#E3C396] text-white px-6 py-2 rounded-lg font-medium shadow-md hover:opacity-90 transition">Search</button>
     </section>
+<!-- Offer Banner -->
+<!-- Offer Banner -->
+<section class="mx-4 my-1">
+  <div class="max-w-6xl mx-auto">
+    <div class="aspect-w-16 aspect-h-9 rounded-2xl overflow-hidden shadow-lg">
+      
+      <!-- Mobile Image -->
+      <img src="/images/offer1.png" 
+           alt="Special Offer Mobile"
+           class="w-full h-full object-cover block sm:hidden" />
+
+      <!-- Desktop Image -->
+      <img src="/images/offer1.1.png" 
+           alt="Special Offer Desktop"
+           class="w-full h-full object-cover hidden sm:block" />
+
+    </div>
+  </div>
+</section>
 
     <!-- Categories Section -->
     <section id="categories" class="max-w-7xl mx-auto px-4 py-10">
@@ -265,24 +291,45 @@
 
   <!-- Content Section -->
   <div class="p-4 flex flex-col flex-1">
-    <h3 class="font-semibold text-base sm:text-lg text-gray-800 line-clamp-1 group-hover:text-[#B76E79] transition-colors">
-      ${product.title}
-    </h3>
-    
-    <div class="text-[#B76E79] font-bold text-md tracking-wide">Price : ₹${product.price || '---'}</div>
-      <div class="text-[#B76E79] font-bold text-md tracking-wide line-through">MRP : ₹${product.mrp || '---'}</div>
-      <div class="text-green-500 font-bold text-md tracking-wide">
-                  Discounted Price: ₹${product.price ? Math.round(product.price - (product.price * 0.10)) : '---'}
-                </div>
-    <!-- Price + Button -->
-    <div class="mt-4 flex items-center justify-between">
-      
-      <button class="bg-gradient-to-r from-[#B76E79] to-[#E3C396] text-white text-xs sm:text-sm px-4 py-1.5 
-        rounded-full shadow-md hover:opacity-90 hover:scale-105 transition">
-        View
-      </button>
-    </div>
+  <h3 class="font-semibold text-base sm:text-lg text-gray-800 line-clamp-1 group-hover:text-[#B76E79] transition-colors">
+    ${product.title}
+  </h3>
+
+  <!-- MRP -->
+  <div class="text-gray-500 font-medium text-sm sm:text-md line-through">
+    MRP : ₹${product.mrp || '---'}
   </div>
+
+  <!-- Selling Price -->
+  <div class="text-[#B76E79] font-bold text-md tracking-wide">
+    Price : ₹${product.price || '---'} 
+    <span class="text-green-600">
+      (${product.mrp && product.price ? Math.round(((product.mrp - product.price) / product.mrp) * 100) : 0}% OFF)
+    </span>
+  </div>
+
+  <!-- Extra Discount -->
+  <div class="text-yellow-600 font-semibold text-sm sm:text-md">
+    Extra 10% OFF applied
+  </div>
+
+  <!-- Final Price -->
+  <div class="text-green-600 font-bold text-md tracking-wide">
+    Final Price : ₹${product.price ? Math.round(product.price - (product.price * 0.10)) : '---'} 
+    <span class="text-green-600">
+      (${product.mrp && product.price ? Math.round(((product.mrp - (product.price - (product.price * 0.10))) / product.mrp) * 100) : 0}% OFF from MRP)
+    </span>
+  </div>
+
+  <!-- Price + Button -->
+  <div class="mt-4 flex items-center justify-between">
+    <button class="bg-gradient-to-r from-[#B76E79] to-[#E3C396] text-white text-xs sm:text-sm px-4 py-1.5 
+      rounded-full shadow-md hover:opacity-90 hover:scale-105 transition">
+      View
+    </button>
+  </div>
+</div>
+
 `;
 
           productsContainer.appendChild(div);

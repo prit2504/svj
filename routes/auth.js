@@ -4,12 +4,12 @@ const Admin = require("../models/Admin");
 const router = express.Router();
 
 // ----------- GET Register page -----------
-router.get("/register", (req, res) => {
+router.get("/welcome2you", (req, res) => {
   res.render("admin/register", { error: null });
 });
 
 // ----------- POST Register -----------
-router.post("/register", async (req, res) => {
+router.post("/welcome2you", async (req, res) => {
   try {
     const { username, password } = req.body;
 
@@ -31,12 +31,12 @@ router.post("/register", async (req, res) => {
 });
 
 // ----------- GET Login page -----------
-router.get("/login", (req, res) => {
+router.get("/aliceinborderland", (req, res) => {
   res.render("admin/login", { error: null });
 });
 
 // ----------- POST Login -----------
-router.post("/login", async (req, res) => {
+router.post("/aliceinborderland", async (req, res) => {
   try {
     const { username, password } = req.body;
 

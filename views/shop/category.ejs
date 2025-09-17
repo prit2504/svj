@@ -354,15 +354,47 @@
               <!-- <p>
                 <%= product.category %>
               </p> -->
-              <div class="footer">
-                <div class="price">Price : ₹<%= product.price || '---' %>
-                </div>
-                <div class="price">MRP : <span class="mrp">₹<%= product.mrp || '---' %></span></div>
-                <div class="discountPrice">
-                  Discounted Price: ₹<%= product.price ? Math.round(product.price - (product.price * 0.10)) : '---' %>
-                </div>
-                <button>View</button>
-              </div>
+              <div class="footer" style="padding:12px; border-top:1px solid #ddd; font-family:sans-serif;">
+  <% 
+    let baseDiscount = product.mrp && product.price 
+      ? Math.round(((product.mrp - product.price) / product.mrp) * 100) 
+      : 0;
+    let extraDiscountedPrice = product.price 
+      ? Math.round(product.price - (product.price * 0.10)) 
+      : null;
+    let totalDiscount = product.mrp && extraDiscountedPrice 
+      ? Math.round(((product.mrp - extraDiscountedPrice) / product.mrp) * 100) 
+      : 0;
+  %>
+
+  <!-- MRP -->
+  <div style="color:#777; text-decoration:line-through; margin-bottom:4px;">
+    MRP : ₹<%= product.mrp || '---' %>
+  </div>
+
+  <!-- Selling Price -->
+  <div style="color:#333; font-weight:600; margin-bottom:4px;">
+    Price : ₹<%= product.price || '---' %>  
+    <span style="color:green; font-weight:bold;">(<%= baseDiscount %>% OFF)</span>
+  </div>
+
+  <!-- Extra Discount -->
+  <div style="color:#d97706; font-weight:600; margin-bottom:4px;">
+    Extra 10% OFF applied
+  </div>
+
+  <!-- Final Price -->
+  <div style="color:#059669; font-weight:bold; font-size:1.1em; margin-bottom:6px;">
+    Final Price : ₹<%= extraDiscountedPrice || '---' %>  
+    <span style="color:#059669;">(<%= totalDiscount %>% OFF from MRP)</span>
+  </div>
+
+  <!-- Button -->
+  <button>
+    View
+  </button>
+</div>
+
             </div>
           </a>
           <% }) %>
