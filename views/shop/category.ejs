@@ -196,7 +196,14 @@
     .price {
       color: #B76E79;
       font-weight: bold;
-      font-size: 18px;
+      font-size: 15px;
+      letter-spacing: 1px;
+    }
+
+    .discountPrice{
+      color: rgb(0, 194, 0);
+      font-weight: bold;
+      font-size: 15px;
       letter-spacing: 1px;
     }
 
@@ -309,7 +316,7 @@
     <h2>
       <%= category %> Collection
     </h2>
-        <div class="flex items-center justify-between mb-4">
+    <div class="flex items-center justify-between mb-4">
       <!-- Dynamic Back Button -->
       <button type="button" onclick="window.history.back()"
         class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-lg transition">
@@ -348,8 +355,12 @@
                 <%= product.category %>
               </p> -->
               <div class="footer">
-                <div class="price">Price : ₹<%= product.price || '---' %></div>
-                <div class="price">Mrp : <span class="mrp">₹<%= product.price || '---' %></span></div>
+                <div class="price">Price : ₹<%= product.price || '---' %>
+                </div>
+                <div class="price">MRP : <span class="mrp">₹<%= product.mrp || '---' %></span></div>
+                <div class="discountPrice">
+                  Discounted Price: ₹<%= product.price ? Math.round(product.price - (product.price * 0.10)) : '---' %>
+                </div>
                 <button>View</button>
               </div>
             </div>
