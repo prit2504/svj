@@ -53,22 +53,16 @@
       margin-left: 8px;
     }
 
-    /* nav .offers {
-      color: #374151;
-      transition: color 0.3s;
-      font-size: 16px;
-      margin-top: 8px;
-    } */
-
-    /* nav .offers:hover {
-      color: #B76E79;
-    } */
-
     /* Header */
     section.header {
       max-width: 1280px;
       margin: 0 auto;
       padding: 24px 16px;
+      position: sticky;
+      top: 60px;
+      /* stick below navbar */
+      background: #f9fafb;
+      z-index: 40;
     }
 
     section.header h2 {
@@ -77,27 +71,46 @@
       margin-bottom: 16px;
     }
 
+    /* Sticky Back Button */
+    .back-button {
+      background-color: #e5e7eb;
+      color: #374151;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: background-color 0.3s, transform 0.2s;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+    }
+
+    .back-button:hover {
+      background-color: #d1d5db;
+      transform: scale(1.05);
+    }
+
     /* Products Grid */
-    section.products {
+    .products {
       max-width: 1280px;
       margin: 0 auto;
       padding: 0 16px 40px;
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      /* default: 2 per row (mobile) */
+      gap: 16px;
     }
 
     /* Card */
     .product-card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+      text-decoration: none;
+      color: inherit;
       display: flex;
       flex-direction: column;
-      overflow: hidden;
-      border-radius: 16px;
-      border: 1px solid #f5e6d3;
-      background: linear-gradient(to bottom right, #fffdf9, #fff8f2, #fff3ea);
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
-
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .product-card:hover {
@@ -108,13 +121,10 @@
     .product-card img {
       width: 100%;
       aspect-ratio: 1 / 1;
-      /* Makes the image container square */
       object-fit: cover;
-      /* Ensures image covers the square without distortion */
       transition: transform 0.5s ease;
       display: block;
     }
-
 
     .product-card:hover img {
       transform: scale(1.05);
@@ -188,27 +198,39 @@
       display: flex;
       flex-direction: column;
       align-items: start;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 8px;
+      gap: 6px;
+      font-size: 14px;
+    }
+
+    .mrp {
+      color: #777;
+      text-decoration: line-through;
     }
 
     .price {
       color: #B76E79;
       font-weight: bold;
-      font-size: 15px;
-      letter-spacing: 1px;
     }
 
-    .discountPrice{
-      color: rgb(0, 194, 0);
+    .price span {
+      color: green;
       font-weight: bold;
-      font-size: 15px;
-      letter-spacing: 1px;
+      margin-left: 4px;
     }
 
-    .mrp {
-      text-decoration: line-through
+    .extra {
+      color: #d97706;
+      font-weight: 600;
+    }
+
+    .final {
+      color: #059669;
+      font-weight: bold;
+      font-size: 1.05em;
+    }
+
+    .final span {
+      color: #059669;
     }
 
     .product-card button {
@@ -221,6 +243,7 @@
       cursor: pointer;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
       transition: all 0.3s;
+      margin-top: 8px;
     }
 
     .product-card button:hover {
@@ -257,25 +280,21 @@
 
     /* ---------------- Responsive Breakpoints ---------------- */
     @media (min-width: 640px) {
-      section.products {
+      .products {
         grid-template-columns: repeat(2, 1fr);
       }
     }
 
     @media (min-width: 768px) {
-      section.products {
+      .products {
         grid-template-columns: repeat(3, 1fr);
       }
     }
 
     @media (min-width: 1024px) {
-      section.products {
+      .products {
         grid-template-columns: repeat(4, 1fr);
       }
-
-      /* nav .offers {
-        margin-top: 0;
-      } */
     }
 
     @media (max-width: 480px) {
@@ -292,7 +311,7 @@
       }
 
       .price {
-        font-size: 16px;
+        font-size: 15px;
       }
     }
   </style>
@@ -307,7 +326,6 @@
         <img src="/images/logo.png" alt="Logo">
         <span class="brand">Shree Vagheswari Jewellers</span>
       </a>
-      <!-- <a href="/offers" class="offers">Offers</a> -->
     </div>
   </nav>
 
@@ -316,28 +334,22 @@
     <h2>
       <%= category %> Collection
     </h2>
-    <div class="flex items-center justify-between mb-4">
-      <!-- Dynamic Back Button -->
-      <button type="button" onclick="window.history.back()"
-        class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-lg transition">
-        ← Back
-      </button>
-    </div>
-
+    <button type="button" onclick="window.history.back()" class="back-button">
+      ← Back
+    </button>
   </section>
 
   <!-- Products Grid -->
   <section class="products">
     <% if (products.length===0) { %>
-      <p style="text-align: center; color: #6b7280; grid-column: 1/-1;">
+      <p style="text-align: center; color: #6b7280; grid-column: 1 / -1;">
         No products found in <%= category %>.
       </p>
       <% } else { %>
         <% products.forEach(product=> { %>
           <a href="/product/<%= product._id %>" class="product-card">
-            <!-- Image -->
             <div class="relative">
-              <img src="<%= product.imageUrl %>" alt="<%= product.title %>" />
+              <img src="<%= product.imageUrl %>" alt="<%= product.title %>" loading="lazy"/>
               <% if (!product.inStock) { %>
                 <span class="status out-of-stock">Out of Stock</span>
                 <% } else { %>
@@ -346,55 +358,36 @@
                     <div class="overlay"></div>
             </div>
 
-            <!-- Content -->
             <div class="content">
               <h3>
                 <%= product.title %>
               </h3>
-              <!-- <p>
-                <%= product.category %>
-              </p> -->
-              <div class="footer" style="padding:12px; border-top:1px solid #ddd; font-family:sans-serif;">
-  <% 
-    let baseDiscount = product.mrp && product.price 
-      ? Math.round(((product.mrp - product.price) / product.mrp) * 100) 
-      : 0;
-    let extraDiscountedPrice = product.price 
-      ? Math.round(product.price - (product.price * 0.10)) 
-      : null;
-    let totalDiscount = product.mrp && extraDiscountedPrice 
-      ? Math.round(((product.mrp - extraDiscountedPrice) / product.mrp) * 100) 
-      : 0;
-  %>
+                <% if (product.description) { %>
+                  <p class="text-gray-700">
+                    <%= product.description %>
+                  </p>
+                  <% } %>
 
-  <!-- MRP -->
-  <div style="color:#777; text-decoration:line-through; margin-bottom:4px;">
-    MRP : ₹<%= product.mrp || '---' %>
-  </div>
+              <div class="footer">
+                <% let baseDiscount=product.mrp && product.price ? Math.round(((product.mrp - product.price) /
+                  product.mrp) * 100) : 0; let extraDiscountedPrice=product.price ? Math.round(product.price -
+                  (product.price * 0.10)) : null; let totalDiscount=product.mrp && extraDiscountedPrice ?
+                  Math.round(((product.mrp - extraDiscountedPrice) / product.mrp) * 100) : 0; %>
 
-  <!-- Selling Price -->
-  <div style="color:#333; font-weight:600; margin-bottom:4px;">
-    Price : ₹<%= product.price || '---' %>  
-    <span style="color:green; font-weight:bold;">(<%= baseDiscount %>% OFF)</span>
-  </div>
+                  <div class="mrp">MRP : ₹<%= product.mrp || '---' %>
+                  </div>
+                  <div class="price">
+                    Price : ₹<%= product.price || '---' %>
+                      <span>(<%= baseDiscount %>% OFF)</span>
+                  </div>
+                  <div class="extra">Extra 10% OFF applied</div>
+                  <div class="final">
+                    Final Price : ₹<%= extraDiscountedPrice || '---' %>
 
-  <!-- Extra Discount -->
-  <div style="color:#d97706; font-weight:600; margin-bottom:4px;">
-    Extra 10% OFF applied
-  </div>
+                  </div>
 
-  <!-- Final Price -->
-  <div style="color:#059669; font-weight:bold; font-size:1.1em; margin-bottom:6px;">
-    Final Price : ₹<%= extraDiscountedPrice || '---' %>  
-    <span style="color:#059669;">(<%= totalDiscount %>% OFF from MRP)</span>
-  </div>
-
-  <!-- Button -->
-  <button>
-    View
-  </button>
-</div>
-
+                  <button>View</button>
+              </div>
             </div>
           </a>
           <% }) %>

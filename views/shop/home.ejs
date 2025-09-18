@@ -120,25 +120,23 @@
       <button id="searchButton"
         class="bg-gradient-to-r from-[#B76E79] to-[#E3C396] text-white px-6 py-2 rounded-lg font-medium shadow-md hover:opacity-90 transition">Search</button>
     </section>
-<!-- Offer Banner -->
-<!-- Offer Banner -->
-<section class="mx-4 my-1">
-  <div class="max-w-6xl mx-auto">
-    <div class="aspect-w-16 aspect-h-9 rounded-2xl overflow-hidden shadow-lg">
-      
-      <!-- Mobile Image -->
-      <img src="/images/offer1.webp" 
-           alt="Special Offer Mobile"
-           class="w-full h-full object-cover block sm:hidden" />
+    <!-- Offer Banner -->
+    <!-- Offer Banner -->
+    <section class="mx-4 my-1">
+      <div class="max-w-6xl mx-auto">
+        <div class="aspect-w-16 aspect-h-9 rounded-2xl overflow-hidden shadow-lg">
 
-      <!-- Desktop Image -->
-      <img src="/images/offer1.1.webp" 
-           alt="Special Offer Desktop"
-           class="w-full h-full object-cover hidden sm:block" />
+          <!-- Mobile Image -->
+          <img src="/images/offer1.webp" alt="Special Offer Mobile"
+            class="w-full h-full object-cover block sm:hidden" />
 
-    </div>
-  </div>
-</section>
+          <!-- Desktop Image -->
+          <img src="/images/offer1.1.webp" alt="Special Offer Desktop"
+            class="w-full h-full object-cover hidden sm:block" />
+
+        </div>
+      </div>
+    </section>
 
     <!-- Categories Section -->
     <section id="categories" class="max-w-7xl mx-auto px-4 py-10">
@@ -147,7 +145,7 @@
         <% const categoryImages={ "Gents Chain" : "/assets/categories/gents_chain.jpg" , "Gents Bracelets"
           : "/assets/categories/gents_bracelet.jpg" , "Gents Kada" : "/assets/categories/gents_kada.jpg"
           , "Rudraksh Mala/Bracelets" : "/assets/categories/rudraksh_mala.jpg" , "Pendals"
-          : "/assets/categories/pandant.jpg" , "Gente Kadi" : "/assets/categories/gents_kada.jpg" , "Ladies Chain"
+          : "/assets/categories/pandant.jpg" , "Gente Kadi" : "/assets/categories/gents_kadi.jpg" , "Ladies Chain"
           : "/assets/categories/ladies_chain.jpg" , "Ladies Bracelets" : "/assets/categories/ladies_bracelates.jpg"
           , "Ladies Kada" : "/assets/categories/ladies_kada.jpg" , "Golden Dokiya" : "/assets/categories/dokiya.jpg"
           , "Dokiya Mangalsutra" : "/assets/categories/dokiya_mangalsutra.jpg" , "Long Mangalsutra"
@@ -178,9 +176,27 @@
     </div>
 
     <!-- Product Grid -->
-    <section id="products"
-      class="border-gray-200 border-2 mx-2 sm:mx-6 rounded-lg px-4 py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <section id="products" class="border-gray-200 border-2 mx-2 sm:mx-6 rounded-lg px-4 py-8 
+         grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-[95%]">
+
+      <!-- Dynamic Products Rendered Here -->
+
+      <!-- Static How to Use Cards in Flexbox -->
+      <div class="col-span-full flex justify-evenly gap-4">
+        <div class="product-card border p-2 flex flex-col items-center">
+          <img src="/images/htu1.webp" alt="How to use" loading="lazy"
+            class="rounded-lg shadow-md hover:scale-105 transition w-full max-w-[200px] object-cover">
+        </div>
+
+        <div class="product-card border p-2 flex flex-col items-center">
+          <img src="/images/htu2.webp" alt="How to use" loading="lazy"
+            class="rounded-lg shadow-md hover:scale-105 transition w-full max-w-[200px] object-cover">
+        </div>
+      </div>
     </section>
+
+
+
 
     <!-- Pagination -->
     <div id="pagination" class="flex justify-center mt-8 gap-3"></div>
@@ -275,62 +291,66 @@
   transition-all duration-300
 `;
 
-          div.innerHTML = `
+ div.innerHTML = ` 
   <!-- Image Section -->
-  <div class="relative overflow-hidden" style="width: 100%; padding-top: 100%; position: relative;">
-    <img src="${product.imageUrl}" alt="${product.title}" 
-         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;"
-         class="group-hover:scale-110">
+  <div class="relative overflow-hidden w-full aspect-square">
+    <img src="${product.imageUrl}" alt="${product.title}" loading="lazy"
+         class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-105 rounded-lg">
+    
     ${!product.inStock ? `
       <span class="absolute top-3 left-3 bg-red-600 text-white text-xs px-2 py-1 rounded-full shadow">Out of Stock</span>
     ` : `
       <span class="absolute top-3 left-3 bg-green-600 text-white text-xs px-2 py-1 rounded-full shadow">Available</span>
     `}
+
     <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition"></div>
   </div>
 
   <!-- Content Section -->
-  <div class="p-4 flex flex-col flex-1">
-  <h3 class="font-semibold text-base sm:text-lg text-gray-800 line-clamp-1 group-hover:text-[#B76E79] transition-colors">
-    ${product.title}
-  </h3>
+  <div class="p-4 flex flex-col flex-1 font-sans">
+    <h3 class="font-semibold text-base sm:text-lg text-gray-800 line-clamp-1 mb-1">
+      ${product.title}
+    </h3>
 
-  <!-- MRP -->
-  <div class="text-gray-500 font-medium text-sm sm:text-md line-through">
-    MRP : ₹${product.mrp || '---'}
+    ${product.description ? `
+      <p class="text-gray-600 text-sm mb-2 line-clamp-2">
+        ${product.description}
+      </p>
+    ` : ``}
+
+    <div class="footer border-t border-gray-200 pt-3 mt-2 text-sm space-y-1">
+      <!-- MRP -->
+      <div class="text-gray-500 line-through">
+        MRP : ₹${product.mrp || '---'}
+      </div>
+
+      <!-- Selling Price -->
+      <div class="text-gray-800 font-medium">
+        Price : ₹${product.price || '---'} 
+        <span class="text-green-600 font-semibold">
+          (${product.mrp && product.price ? Math.round(((product.mrp - product.price) / product.mrp) * 100) : 0}% OFF)
+        </span>
+      </div>
+
+      <!-- Extra Discount -->
+      <div class="text-yellow-600 font-medium">
+        Extra 10% OFF applied
+      </div>
+
+      <!-- Final Price -->
+      <div class="text-green-700 font-bold">
+        Final Price : ₹${product.price ? Math.round(product.price - (product.price * 0.10)) : '---'}
+
+      </div>
+
+      <!-- Button -->
+      <button class="mt-3 bg-[#B76E79] text-white px-4 py-1.5 rounded-md shadow hover:opacity-90 transition">
+        View
+      </button>
+    </div>
   </div>
-
-  <!-- Selling Price -->
-  <div class="text-[#B76E79] font-bold text-md tracking-wide">
-    Price : ₹${product.price || '---'} 
-    <span class="text-green-600">
-      (${product.mrp && product.price ? Math.round(((product.mrp - product.price) / product.mrp) * 100) : 0}% OFF)
-    </span>
-  </div>
-
-  <!-- Extra Discount -->
-  <div class="text-yellow-600 font-semibold text-sm sm:text-md">
-    Extra 10% OFF applied
-  </div>
-
-  <!-- Final Price -->
-  <div class="text-green-600 font-bold text-md tracking-wide">
-    Final Price : ₹${product.price ? Math.round(product.price - (product.price * 0.10)) : '---'} 
-    <span class="text-green-600">
-      (${product.mrp && product.price ? Math.round(((product.mrp - (product.price - (product.price * 0.10))) / product.mrp) * 100) : 0}% OFF from MRP)
-    </span>
-  </div>
-
-  <!-- Price + Button -->
-  <div class="mt-4 flex items-center justify-between">
-    <button class="bg-gradient-to-r from-[#B76E79] to-[#E3C396] text-white text-xs sm:text-sm px-4 py-1.5 
-      rounded-full shadow-md hover:opacity-90 hover:scale-105 transition">
-      View
-    </button>
-  </div>
-</div>
-
 `;
+
 
           productsContainer.appendChild(div);
         });

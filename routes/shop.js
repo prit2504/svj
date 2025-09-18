@@ -43,7 +43,7 @@ router.get("/api/products", async (req, res) => {
 router.get("/category/:category", async (req, res) => {
   try {
     const { category } = req.params;
-    const { page = 1, limit = 8 } = req.query; // removed search
+    const { page = 1, limit = 16 } = req.query; // removed search
 
     const filter = {};
     if (category && category !== "All") filter.category = category;
