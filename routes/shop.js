@@ -17,14 +17,32 @@ router.get("/", async (req, res) => {
 // ---------- API to fetch products ----------
 router.get("/api/products", async (req, res) => {
   try {
-    const { category, search, page = 1, limit = 16 } = req.query;
+    const { category, search, page = 1, limit = 16, minPrice, maxPrice } = req.query;
     const filter = {};
-    if (category && category !== "All") filter.category = category;
-    if (search) filter.title = { $regex: search, $options: "i" };
 
+    // Category filter
+    if (category && category !== "All") {
+      filter.category = category;
+    }
+
+    // Search in multiple fields
+    if (search) {
+      filter.$or = [
+        { title: { $regex: search, $options: "i" } },
+        { description: { $regex: search, $options: "i" } },
+        { category: { $regex: search, $options: "i" } },
+      ];
+    }
+
+    // Pagination
     const skip = (page - 1) * limit;
     const total = await Product.countDocuments(filter);
-    const products = await Product.find(filter).sort({ createdAt: -1 }).skip(skip).limit(Number(limit));
+
+    // Fetch products
+    const products = await Product.find(filter)
+      .sort({ createdAt: -1 }) // newest first
+      .skip(skip)
+      .limit(Number(limit));
 
     res.json({
       products,
@@ -37,6 +55,7 @@ router.get("/api/products", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch products" });
   }
 });
+
 
 // -------- Category Products View --------
 
