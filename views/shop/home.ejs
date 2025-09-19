@@ -199,7 +199,7 @@
 
 
     <!-- Pagination -->
-    <div id="pagination" class="flex justify-center mt-8 gap-3"></div>
+    <div id="pagination" class="flex flex-wrap justify-center mt-8 gap-3 mx-5 text-sm sm:text-md"></div>
 
     <!-- Footer -->
     <footer id="footer" class="bg-[#faf7f2] border-t border-[#E3C396]/30 text-[#6B5B4D] mt-12 p-8 text-sm">
@@ -210,6 +210,9 @@
             <li>
               <a href="/shop-location" class="hover:underline text-gray-700">
                 Shamal Bechor Pole, Vithhal Mandir Lane, B/h Bank Of Baroda, Mandvi, Vadodara. 390001
+                <div class="font-bold underline">
+                  Click Here
+                </div>
               </a>
             </li>
           </ul>
@@ -268,7 +271,7 @@
     const loader = document.getElementById('loader');
     const paginationContainer = document.getElementById('pagination');
     let currentPage = 1;
-    const limit = 8;
+    const limit = 16;
 
     async function fetchProducts() {
       loader.classList.remove('hidden');

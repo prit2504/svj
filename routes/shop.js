@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
 // ---------- API to fetch products ----------
 router.get("/api/products", async (req, res) => {
   try {
-    const { category, search, page = 1, limit = 8 } = req.query;
+    const { category, search, page = 1, limit = 16 } = req.query;
     const filter = {};
     if (category && category !== "All") filter.category = category;
     if (search) filter.title = { $regex: search, $options: "i" };
