@@ -144,14 +144,15 @@
       <div class="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-9 gap-3">
         <% const categoryImages={ "Gents Chain" : "/assets/categories/gents_chain.jpg" , "Gents Bracelets"
           : "/assets/categories/gents_bracelet.jpg" , "Gents Kada" : "/assets/categories/gents_kada.jpg"
-          , "Rudraksh Mala/Bracelets" : "/assets/categories/rudraksh_mala.jpg" , "Pendals"
-          : "/assets/categories/pandant.jpg" , "Gente Kadi" : "/assets/categories/gents_kadi.jpg" , "Ladies Chain"
-          : "/assets/categories/ladies_chain.jpg" , "Ladies Bracelets" : "/assets/categories/ladies_bracelates.jpg"
-          , "Ladies Kada" : "/assets/categories/ladies_kada.jpg" , "Golden Dokiya" : "/assets/categories/dokiya.jpg"
-          , "Dokiya Mangalsutra" : "/assets/categories/dokiya_mangalsutra.jpg" , "Long Mangalsutra"
-          : "/assets/categories/long_mangalsutra.jpg" , "Half Set" : "/assets/categories/half_nacklaceset.jpg"
-          , "Long Set ( Rani Har )" : "/assets/categories/rani_haar_neckeless.jpg" , "Bangles"
-          : "/assets/categories/bangles.jpg" , "Chudi Bangles" : "/assets/categories/chudi_bangles.jpg" , "Fancy Mala"
+          , "Rudraksh Mala/Bracelets" : "/assets/categories/rudraksh_mala.jpg" , "Gente Kadi"
+          : "/assets/categories/gents_kadi.jpg" , "Ladies Chain" : "/assets/categories/ladies_chain.jpg"
+          , "Ladies Bracelets" : "/assets/categories/ladies_bracelates.jpg" , "Ladies Kada"
+          : "/assets/categories/ladies_kada.jpg" , "Golden Dokiya" : "/assets/categories/dokiya.jpg"
+          , "Mangalsutra with Earings" : "/assets/categories/pandant.jpg" , "Dokiya Mangalsutra"
+          : "/assets/categories/dokiya_mangalsutra.jpg" , "Long Mangalsutra" : "/assets/categories/long_mangalsutra.jpg"
+          , "Half Set" : "/assets/categories/half_nacklaceset.jpg" , "Long Set ( Rani Har )"
+          : "/assets/categories/rani_haar_neckeless.jpg" , "Bangles" : "/assets/categories/bangles.jpg"
+          , "Chudi Bangles" : "/assets/categories/chudi_bangles.jpg" , "Fancy Mala"
           : "/assets/categories/fancy_mala.jpg" }; %>
           <% categories.forEach(cat=> { %>
             <a href="/category/<%= encodeURIComponent(cat) %>"
@@ -294,7 +295,7 @@
   transition-all duration-300
 `;
 
- div.innerHTML = ` 
+          div.innerHTML = ` 
   <!-- Image Section -->
   <div class="relative overflow-hidden w-full aspect-square">
     <img src="${product.imageUrl}" alt="${product.title}" loading="lazy"

@@ -20,7 +20,6 @@ const productSchema = new mongoose.Schema(
         "Gents Bracelets",
         "Gents Kada",
         "Rudraksh Mala/Bracelets",
-        "Pendals",
         "Gente Kadi",
 
         // Ladies
@@ -28,6 +27,7 @@ const productSchema = new mongoose.Schema(
         "Ladies Bracelets",
         "Ladies Kada",
         "Golden Dokiya",
+        "Mangalsutra with Earings",
         "Dokiya Mangalsutra",
         "Long Mangalsutra",
         "Half Set",
