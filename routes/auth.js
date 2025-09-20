@@ -61,7 +61,7 @@ router.post("/aliceinborderland", async (req, res) => {
 // ----------- Logout -----------
 router.get("/logout", (req, res) => {
   req.session.destroy(() => {
-    res.redirect("/auth/login");
+    res.redirect("/auth/aliceinborderland");
   });
 });
 

@@ -12,22 +12,6 @@ function isAdmin(req, res, next) {
   return res.redirect("/auth/login");
 }
 
-// ----------- Admin Dashboard -----------
-// router.get("/dashboard", isAdmin, async (req, res) => {
-//   try {
-//     const products = await Product.find().sort({ createdAt: -1 });
-//     const categories = Product.schema.path("category").enumValues;
-    
-//     res.render("admin/dashboard", {
-//       products,
-//       selectedCategory: "",
-//       categories
-//     });
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).send("Server Error");
-//   }
-// });
 router.get("/dashboard", isAdmin, async (req, res) => {
   try {
     const selectedCategory = req.query.category || "All";
